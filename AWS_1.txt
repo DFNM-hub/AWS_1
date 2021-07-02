@@ -1,0 +1,5 @@
+aws ec2 run-instances --image-id ami-0ec851a6ef12c628e --count 1 --instance-type t1.micro --key-name MyKeyPair --security-groups my-sg
+
+aws s3 mb s3://bucket-one
+
+aws ec2 modify-instance-attribute \ --instance-id (((i-1234567890abcdef0))) \ --instance-type "{\"Value\": \"m1.small\"}" 	*change instance id
