@@ -9,3 +9,16 @@ aws ec2 stop-instances --region us-east-1 --instance-id i-0812a26e0913c0556
 aws ec2 terminate-instances --instance-id i-0812a26e0913c0556
 
 aws cloudwatch put-metric-alarm --alarm-name StatusCheckFailed-Alarm-for-i-0812a26e0913c0556 --metric-name StatusCheckFailed --namespace AWS/EC2 --statistic Maximum --dimensions Name=InstanceId,Value=i-0812a26e0913c0556 --unit Count --period 300 --evaluation-periods 2 --threshold 1 --comparison-operator GreaterThanOrEqualToThreshold --alarm-actions arn:aws:sns:us-east-1:111122223333:my-sns-topic
+
+
+#AWS Instance
+
+resource "aws_instance" "example" {
+     ami = data.aws_ami.windows.id
+     instance_type = "t2.micro"
+     availability_zone = var.availability_zone
+
+lifecycle {
+     ignore_changes = [ami]
+     }
+ }
